@@ -51,7 +51,8 @@ public class Menu {
             System.out.println("Opción seleccionada: " + selectedItem);
             ingresoDatos();
         } else {
-            System.out.println("Diálogo cancelado");
+        	
+        	JOptionPane.showMessageDialog(null, "Programa Terminado");
             
         }
     }
@@ -70,22 +71,26 @@ public class Menu {
         					JOptionPane.INFORMATION_MESSAGE
         			)
         	);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 
-    	
-    	
-    	if (valor > 0) {
-			System.out.println("El valor introducido es  :"+ valor);
-			Dinero.setValor(valor);
-			CuadroDeDialogo();
+        	if (valor > 0) {
+    			System.out.println("El valor introducido es  :"+ valor);
+    			Dinero.setValor(valor);
+    			CuadroDeDialogo();
+    			
+    		
+    		} else {
+    			JOptionPane.showMessageDialog(null, "No se aceptan datos negativos");
+
+    		}    	
+    		
+		} catch (NumberFormatException e ) {
+			JOptionPane.showMessageDialog(null, "Ingrese numeros no textos");
+			MenuPrincipal();
+
 			
-		
-		} else {
-			JOptionPane.showMessageDialog(null, "No se aceptan datos negatimos");
-
-		}    	
+		}
+    	
+    	
     }
     
     
@@ -172,7 +177,7 @@ public class Menu {
             Resultado(resultado);
         } else {
             System.out.println("Diálogo cancelado");
-            
+            MenuPrincipal();
         }
     	
     }
@@ -183,7 +188,29 @@ public class Menu {
     	String Resultado = "Tienes "+ result;
     	
     	JOptionPane.showMessageDialog(null,Resultado);
-    		
+    	int resultado = JOptionPane.showOptionDialog(null,
+    			"¿Desea continuar?",
+    			"Selecciona una opcion",
+    			JOptionPane.YES_NO_OPTION,
+    			JOptionPane.QUESTION_MESSAGE,
+    			null, null, null
+    	);
+    	
+    	switch (resultado) {
+		case 0:
+			MenuPrincipal();
+			break;
+		case 1:
+			JOptionPane.showMessageDialog(null, "Programa Terminado");
+			break;
+		}
+    	
+    	
+    
     }
+    
+
+    
+    
     
 }
